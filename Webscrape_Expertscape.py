@@ -1,11 +1,13 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 from csv import writer
 
-response = requests.get('https://expertscape.com/ex/urinary%20bladder%20neoplasms')
+r = requests.get('https://expertscape.com/ex/urinary%20bladder%20neoplasms')
 
-soup = BeautifulSoup(response.text, 'html.parser')
+soup = bs(r.content, 'html.parser')
 
-doctor = soup.find(id='264')
+# print(soup.prettify())
 
-print(doctor)
+doctor_column = soup.find('td', attrs={'id': 'expColTD_a'})
+
+print(doctor_column)
